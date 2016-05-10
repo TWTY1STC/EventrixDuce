@@ -57,7 +57,8 @@ class RegisteredApplicationsController < ApplicationController
   
   #'users/id/registered_applications/id/delete'
   def destroy
-    @registered_application = RegisteredApplication.find(params[:id])
+    #@registered_application.destroy
+    #@registered_application = RegisteredApplication.find(params[:id])
     if @registered_application.destroy
       flash[:notice] = "\"#{@registered_application.name}\" was deleted sucessfully."
       redirect_to user_registered_applications_path
