@@ -3,5 +3,6 @@ class WelcomeController < ApplicationController
   end
 
   def welcome
+    @registered_applications = current_user.registered_applications
   end
 end

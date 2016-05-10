@@ -17,9 +17,19 @@
 @import "bootstrap";
 
 .content-container {
-  margin-top: 20%;
+  margin-top: 10%;
   margin-left: 10%;
   margin-right: 10%;
   size: 80%;
   position: center
+}
+
+#title {
+  text-align: center;
+  color: #39004d;
+  text-shadow: 2px;
+}
+.flash {
+  margin-top: 10%;
+  size: 70%;
 }

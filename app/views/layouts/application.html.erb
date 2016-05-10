@@ -10,10 +10,13 @@
 <body>
 
  <div class="container">
+  <nav class="navbar-header">
+    <h1 id="title", style="font-family: Agency FB;"><strong>Eventrix</strong></h1>
+  </nav>
     <div class="pull-right user-info">
       <% if user_signed_in? %>
         <div class="navbar-text navbar-right">
-          <p>Signed in as: <strong><%= current_user.email %></strong></p>
+          <p><strong><%= current_user.name %></strong></p>
           <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> -
           <%= link_to "Sign Out", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
           - <%= link_to 'Track New App', new_user_registered_application_path(current_user), :class => 'navbar-link'%>
@@ -23,6 +26,7 @@
          <%= link_to "Sign In", new_user_session_path, :class => 'navbar-link'  %>
       <% end %>
     </div>
+
     <div class="flash">
       <% if flash[:notice] %>
         <div class="alert alert-success">

@@ -1,6 +1,4 @@
 <h1>EventrixDuce</h1>
 <p>Providing actionable analytics for all your Rails applications.</p>
 
-<% if user_signed_in?%>
-  <% render partial: "registered_applications/registered_applications" %>
-<% end %>
+<%= render "registered_applications/registered_applications" %>

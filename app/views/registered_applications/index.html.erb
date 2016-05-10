@@ -1,26 +1,3 @@
-<h4>Index page</h4>
+<h3 class="page_title">Tracked Application Index</h3>
 
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th>Application Name</th>
-      <th>URL</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
- <tbody>
-    <% unless current_user.registered_applications.empty? %>
-      <%= @user.registered_applications.each do |application|%>
-        <tr>
-          <td><strong><%=link_to application.name, @user_registered_application_path %></strong></td>
-          <td><%= application.url %></td>
-          <td><%= link_to 'Delete', class: 'btn btn-danger btn-sm', controller: :registered_applications, method: :delete, data: {confirm: "Are you sure you want to stop tracking this application?"} %></td>
-        </tr>
-      <% end %>
-      <%= link_to 'Add Application', new_user_registered_application_path %>
-    <% else %> 
-      <%= link_to 'Add Application', new_user_registered_application_path %>
-    <% end %>
-  </tbody>
-</table>
+<%= render "registered_applications/registered_applications" %>

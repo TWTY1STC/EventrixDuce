@@ -1,18 +1,17 @@
-This is one application view.
-
 <div>
-<p>
-  <strong>Application Name:</strong>
-  <%= @registered_application.name %>
-</p>
+  <p>
+    <strong>Application Name:</strong>
+    <%= @registered_application.name %>
+  </p>
 </div>
 <div>
-<p>
-  <strong>URL:</strong>
-  <%= @registered_application.url %>
-</p>
+  <p>
+    <strong>URL:</strong>
+    <%= @registered_application.url %>
+  </p>
 </div>
 <% if user_signed_in? %>
   <%= link_to 'Edit', edit_user_registered_application_path %> |
+  <%= link_to 'Delete', class: 'btn btn-danger btn-sm', controller: :registered_applications, method: :delete, data: {confirm: "Are you sure you want to stop tracking this application?"} %> |
 <% end %>
   <%= link_to 'View all', user_registered_applications_path %> 

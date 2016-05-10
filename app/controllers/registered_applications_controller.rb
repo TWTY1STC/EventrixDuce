@@ -1,31 +1,21 @@
 class RegisteredApplicationsController < ApplicationController
-  #only the user/creator/owner & admin of the registered app should be able to see anything about a particular app.
-  #need to define to use 
- #before_action :authorize_user
+  before_action :set_registered_application, only: [:show, :edit, :update, :destroy]
   
   #'users/id/registered_applications'
   def index 
-    @user = User.find(params[:user_id])
-    @registered_applications = RegisteredApplication.where(:user_id, @user.id)
   end 
   
    #'users/id/registered_applications/id'
   def show
-    #@user = User.find(params[:user_id])
-    @registered_application = RegisteredApplication.find(params[:id])
-    #or is it :url?
   end
   
   #'users/id/registered_applications/new'
   def new 
-    @user = User.find(params[:user_id])
     @registered_application = RegisteredApplication.new
   end
   
   def create
-    @user = User.find(params[:user_id])
-    @registered_application = @user.registered_applications.build(registered_application_params)
-    @registered_application.user = current_user
+    @registered_application = current_user.registered_applications.build(registered_application_params)
     
     if @registered_application.save
       flash[:notice] = "Application registered and saved."
@@ -38,12 +28,9 @@ class RegisteredApplicationsController < ApplicationController
   
   #'users/id/registered_applications/id/edit'
   def edit
-    @user = User.find(params[:user_id])
-    @registered_application = RegisteredApplication.find(params[:id])
   end
   
   def update
-    @registered_application = RegisteredApplication.find(params[:id])
     @registered_application.assign_attributes(registered_application_params)
     
     if @registered_application.save
@@ -57,9 +44,7 @@ class RegisteredApplicationsController < ApplicationController
   
   #'users/id/registered_applications/id/delete'
   def destroy
-    #@registered_application.destroy
-    #@registered_application = RegisteredApplication.find(params[:id])
-    if @registered_application.destroy
+   if @registered_application.destroy
       flash[:notice] = "\"#{@registered_application.name}\" was deleted sucessfully."
       redirect_to user_registered_applications_path
     else
@@ -74,18 +59,8 @@ class RegisteredApplicationsController < ApplicationController
     params.require(:registered_application).permit(:name, :url)
   end
   
-  def find_registered_application
-    
+  def set_registered_application
+    @registered_application = current_user.registered_applications.find(params[:id])
   end
-    
- #def authorize_user
- # user = User.find(params[:id])
-#end
-
+ 
 end
-
-
-#<% unless current_user.registered_applications.empty? %>
-#  <% else %> 
-#             - <%= link_to 'Add Application',  %>
-#            <% end %>
