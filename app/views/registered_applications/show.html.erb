@@ -1,0 +1,18 @@
+This is one application view.
+
+<div>
+<p>
+  <strong>Application Name:</strong>
+  <%= @registered_application.name %>
+</p>
+</div>
+<div>
+<p>
+  <strong>URL:</strong>
+  <%= @registered_application.url %>
+</p>
+</div>
+<% if user_signed_in? %>
+  <%= link_to 'Edit', edit_registered_application_path(@registered_application) %> |
+<% end %>
+  <%= link_to 'Back', registered_applications_path %>

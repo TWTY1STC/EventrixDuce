@@ -1,10 +1,11 @@
 class RegisteredApplicationsController < ApplicationController
   #only the user/creator/owner of the registered app should be able to see anything about a particular app.
-  #need to define to use before_action :authorize_user
+  #need to define to use 
+  before_action :authorize_user
   
   #'users/id/registered_applications'
   def index 
-    @registered_applications = RegisteredApplication.where.user_id(current_user.id)
+    @registered_applications = RegisteredApplication.all 
   end 
   
    #'users/id/registered_applications/id'
@@ -53,15 +54,27 @@ class RegisteredApplicationsController < ApplicationController
   
   #'users/id/registered_applications/id/delete'
   def destroy
-    
+    @registered_application = RegisteredApplication.find(params[:id])
+    if @registered_application.destroy
+      flash[:notice] = "\"#{@registered_application.name}\" was deleted sucessfully."
+      redirect_to user_registered_applications_path
+    else
+      flash.now[:alert] = "There was an error deleting the application"
+      render :show
+    end
   end
   
   private
   
   def registered_application_params
+    params.require(:registered_application).permit(:name, :url)
   end
   
   def find_registered_application
     
+  end
+  
+  def authorize_user
+    user = User.find(params[:id])
   end
 end
