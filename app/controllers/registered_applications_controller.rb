@@ -1,15 +1,17 @@
 class RegisteredApplicationsController < ApplicationController
-  #only the user/creator/owner of the registered app should be able to see anything about a particular app.
+  #only the user/creator/owner & admin of the registered app should be able to see anything about a particular app.
   #need to define to use 
-  before_action :authorize_user
+ #before_action :authorize_user
   
   #'users/id/registered_applications'
   def index 
-    @registered_applications = RegisteredApplication.all 
+    @user = User.find(params[:user_id])
+    @registered_applications = RegisteredApplication.where(:user_id, @user.id)
   end 
   
    #'users/id/registered_applications/id'
   def show
+    #@user = User.find(params[:user_id])
     @registered_application = RegisteredApplication.find(params[:id])
     #or is it :url?
   end
@@ -36,6 +38,7 @@ class RegisteredApplicationsController < ApplicationController
   
   #'users/id/registered_applications/id/edit'
   def edit
+    @user = User.find(params[:user_id])
     @registered_application = RegisteredApplication.find(params[:id])
   end
   
@@ -73,8 +76,15 @@ class RegisteredApplicationsController < ApplicationController
   def find_registered_application
     
   end
-  
-  def authorize_user
-    user = User.find(params[:id])
-  end
+    
+ #def authorize_user
+ # user = User.find(params[:id])
+#end
+
 end
+
+
+#<% unless current_user.registered_applications.empty? %>
+#  <% else %> 
+#             - <%= link_to 'Add Application',  %>
+#            <% end %>

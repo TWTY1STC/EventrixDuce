@@ -1,1 +1,11 @@
 Index page.
+
+<% unless current_user.registered_applications.empty? %>
+    <%= @user.registered_applications.each do |application|%>
+      <li><%= link_to "application.name", @user_registered_application_path %> 
+      <%= application.url %></li> |
+      <%= link_to "Edit", edit_user_registered_application_path[:id => @application.id]%> <%= link_to "Delete", registered_applications, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %>
+<% else %> 
+ <%= link_to 'Add Application', new_user_registered_application_path %>
+<% end %>
