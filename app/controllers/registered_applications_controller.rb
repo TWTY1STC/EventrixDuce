@@ -7,6 +7,7 @@ class RegisteredApplicationsController < ApplicationController
   
    #'users/id/registered_applications/id'
   def show
+    @events = @registered_application.events.group_by(&:name)
   end
   
   #'users/id/registered_applications/new'
@@ -44,7 +45,7 @@ class RegisteredApplicationsController < ApplicationController
   
   #'users/id/registered_applications/id/delete'
   def destroy
-   if @registered_application.destroy
+    if @registered_application.destroy
       flash[:notice] = "\"#{@registered_application.name}\" was deleted sucessfully."
       redirect_to user_registered_applications_path
     else
