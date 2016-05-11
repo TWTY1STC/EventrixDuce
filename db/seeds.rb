@@ -28,7 +28,7 @@ registered_applications = RegisteredApplication.all
 75.times do
   Event.create!(
     name: Faker::Hacker.verb,
-    registered_application_id: registered_applications.sample
+    registered_application: registered_applications.sample
     )
 end
 events = Event.all
