@@ -10,6 +10,9 @@
     <%= @registered_application.url %>
   </p>
 </div>
+<div>
+  <p><%=@events.count%></p>
+</div>
 <% if user_signed_in? %>
   <%= link_to 'Edit', edit_user_registered_application_path %> |
   <%= link_to 'Delete', class: 'btn btn-danger btn-sm', controller: :registered_applications, method: :delete, data: {confirm: "Are you sure you want to stop tracking this application?"} %> |
