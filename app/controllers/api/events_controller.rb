@@ -17,6 +17,8 @@ class API::EventsController < ApplicationController
     end
   end
   
+  private
+  
   def preflight
     head 200
   end
@@ -26,8 +28,6 @@ class API::EventsController < ApplicationController
     headers['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS'
     headers['Access-Control-Allow-Headers'] = 'Content-Type'
   end
-  
-  private
   
   def event_params
     params.require(:event).permit(:name)
