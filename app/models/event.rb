@@ -1,3 +1,3 @@
 class Event < ActiveRecord::Base
-  has_and_belongs_to_many :registered_applications
+  belongs_to :registered_application
 end
