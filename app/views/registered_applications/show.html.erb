@@ -11,7 +11,11 @@
   </p>
 </div>
 <div>
-  <p><%= line_chart @registered_application.events.group_by_day(:created_at).count %></p>
+  <p><%=@events.count%></p>
+  <%= pie_chart @registered_application.events.group(:name).count %>
+  <% unless Rails.env.development? %>
+    <%= line_chart @registered_application.events.group_by_day(:created_at).count %>
+  <% end %>
 </div>
 <% if user_signed_in? %>
   <%= link_to 'Edit', edit_user_registered_application_path %> |
